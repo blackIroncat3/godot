@@ -1,0 +1,55 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Menu.cs" type="Script" id=1]
+[ext_resource path="res://cosmetics/desktop-1920x1080.jpg" type="Texture" id=2]
+[ext_resource path="res://Baloo-Regular.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 60
+font_data = ExtResource( 3 )
+
+[node name="Menu" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_top = -1.0
+margin_right = 1026.0
+margin_bottom = 598.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="Start" type="Button" parent="."]
+margin_top = 380.0
+margin_right = 216.0
+margin_bottom = 430.0
+text = "START"
+
+[node name="Control" type="Button" parent="."]
+margin_top = 450.0
+margin_right = 216.0
+margin_bottom = 500.0
+text = "CONTROL MENU"
+
+[node name="Quit" type="Button" parent="."]
+margin_top = 520.0
+margin_right = 216.0
+margin_bottom = 570.0
+text = "QUIT"
+
+[node name="TextEdit" type="TextEdit" parent="."]
+use_parent_material = true
+margin_left = 87.0
+margin_top = 92.0
+margin_right = 967.0
+margin_bottom = 194.0
+custom_colors/background_color = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 1 )
+text = "FELFÖLDI ÁRON & SIMON DÁVID"
+readonly = true
+syntax_highlighting = true
+
+[connection signal="pressed" from="Start" to="." method="_on_Start_pressed"]
+[connection signal="pressed" from="Control" to="." method="_on_Control_pressed"]
+[connection signal="pressed" from="Quit" to="." method="_on_Quit_pressed"]

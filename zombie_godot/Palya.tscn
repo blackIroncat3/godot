@@ -1,0 +1,104 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://negyzet-lap-13.png" type="Texture" id=1]
+[ext_resource path="res://Robot.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Penz.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Palya.cs" type="Script" id=4]
+[ext_resource path="res://Bullet.tscn" type="PackedScene" id=5]
+[ext_resource path="res://Enemy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Baloo-Regular.ttf" type="DynamicFontData" id=7]
+[ext_resource path="res://Heal.tscn" type="PackedScene" id=8]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
+
+[sub_resource type="TileSet" id=2]
+0/name = "negyzet-lap-13.png 0"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 32, 32 )
+0/tile_mode = 0
+0/occluder_offset = Vector2( 0, 0 )
+0/navigation_offset = Vector2( 0, 0 )
+0/shape_offset = Vector2( 0, 0 )
+0/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+0/shape = SubResource( 1 )
+0/shape_one_way = false
+0/shape_one_way_margin = 1.0
+0/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 1 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
+0/z_index = 0
+
+[sub_resource type="DynamicFont" id=3]
+size = 30
+font_data = ExtResource( 7 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 30
+font_data = ExtResource( 7 )
+
+[node name="Palya" type="Node2D"]
+script = ExtResource( 4 )
+PsPenz = ExtResource( 3 )
+PsHp = ExtResource( 8 )
+psZombie = ExtResource( 6 )
+
+[node name="Robot" parent="." instance=ExtResource( 2 )]
+position = Vector2( 193, 300 )
+
+[node name="Penz" parent="." instance=ExtResource( 3 )]
+position = Vector2( 518, 149 )
+
+[node name="Bullet" parent="." instance=ExtResource( 5 )]
+visible = false
+position = Vector2( 75, 63 )
+
+[node name="Enemy" parent="." instance=ExtResource( 6 )]
+position = Vector2( 898, 192 )
+
+[node name="Heal" parent="." instance=ExtResource( 8 )]
+position = Vector2( 484, 251 )
+scale = Vector2( 0.3, 0.3 )
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = SubResource( 2 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="PontFelirat" type="Label" parent="."]
+margin_left = 10.0
+margin_right = 50.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 3 )
+text = "0"
+
+[node name="Idozito" type="Timer" parent="."]
+wait_time = 60.0
+one_shot = true
+
+[node name="IdoFelirat" type="Label" parent="."]
+margin_left = 980.0
+margin_right = 1024.0
+margin_bottom = 17.0
+custom_fonts/font = SubResource( 4 )
+text = "60"
+
+[node name="Hp_Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[node name="Back" type="Button" parent="."]
+margin_top = 508.0
+margin_right = 94.0
+margin_bottom = 599.0
+text = "Back To Menu"
+flat = true
+
+[connection signal="gyujt" from="Penz" to="." method="_on_Penz_gyujt"]
+[connection signal="timeout" from="Idozito" to="." method="_on_Idozito_timeout"]
+[connection signal="pressed" from="Back" to="." method="_on_Back_pressed"]
